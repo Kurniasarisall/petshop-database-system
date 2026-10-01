@@ -22,6 +22,28 @@ Sistem ini memodelkan proses bisnis ritel pet shop mulai dari pendataan stok pak
 
 ---
 
+## Penjelasan Berkas & Artefak Proyek
+
+Repositori ini dilengkapi dengan artefak perancangan dan data pendukung tugas akhir:
+
+1. **`ERD.png` (Entity-Relationship Diagram)**
+   * Merupakan pemodelan konseptual sistem basis data Pet Shop berbasis notasi Chen.
+   * Memetakan entitas utama (`PRODUK`, `PEMBELI`, `KASIR`), relasi transaksi (`Pembelian`), serta atribut masing-masing entitas termasuk Primary Key dan atribut komposit/turunan (`Tanggal Lahir` dan `Umur` pada kasir).
+
+2. **`RAT.png` (Relasi Antar Tabel)**
+   * Tangkapan layar skema relasional fisik dari fitur *Designer* phpMyAdmin.
+   * Menampilkan pemetaan *Foreign Key* dari tabel perantara `pembelian` menuju `ID_Pembeli`, `ID_Kasir`, dan `ID_Produk` dengan integritas referensial.
+
+3. **`data produk petshop.xlsx` (Dataset Awal Produk)**
+   * Berkas lembar kerja Excel berisi daftar mentah inventaris barang toko hewan peliharaan (makanan kucing, obat-obatan, perlengkapan mandi, pasir, dll.).
+   * Digunakan sebagai sumber data acuan sebelum proses normalisasi dan migrasi ke dalam query `INSERT` tabel `produk` pada basis data MySQL.
+
+4. **`PPT Presentasi.pptx` (Materi Paparan Proyek)**
+   * Berkas presentasi kelompok (Sistem Teknologi Basis Data IF-F) yang merangkum keseluruhan proyek[cite: 13].
+   * Memuat diagram ERD, skema relasi tabel (RAT), implementasi query SQL, hingga bukti tangkapan layar pengujian isi tabel pada phpMyAdmin.
+
+---
+
 ## Struktur Entitas & Relasi Tabel (RAT)
 Sistem memiliki 4 entitas utama yang saling terhubung:
 
