@@ -1,0 +1,46 @@
+USE pet_shop;
+
+-- Data Kasir
+INSERT INTO kasir (ID_Kasir, Nama_Kasir, Tanggal_Lahir, Email_kasir) VALUES
+('10001', 'Thomas De Hancham', '01-01-2001', 'hancham@gmail.com'),
+('10002', 'Fahma', '11-01-1999', 'fahma@gmail.com'),
+('10003', 'Jamal', '23-06-1998', 'jamal@gmail.com'),
+('10004', 'Kamal', '17-07-1997', 'kamal@gmail.com'),
+('10005', 'Cimo', '19-08-2000', 'cimo@gmail.com');
+
+-- Data Pembeli
+INSERT INTO pembeli (ID_Pembeli, Nama_Pembeli, Alamat_Pembeli, Email_Pembeli) VALUES
+('00000', 'Danang', 'Banyuwangi', 'Danang@gmail.com'),
+('00001', 'Utami', 'Jambi', 'Utami@gmail.com'),
+('00002', 'Lula', 'Jakarta Utara', 'Lula@gmail.com'),
+('00003', 'Bagus', 'Banjarnegara', 'Bagus@gmail.com'),
+('00004', 'Taura', 'Klaten', 'Taura@gmail.com'),
+('00005', 'Salasa', 'Salatiga', 'Salasa@gmail.com'),
+('11111', 'Jojo', 'Palembang', 'Jojo@gmail.com'),
+('11112', 'Fauzan', 'Yogyakarta', 'Fauzan@gmail.com'),
+('11113', 'Andiko', 'Yogyakarta', 'Andiko@gmail.com'),
+('22221', 'Aisyah', 'Surabaya', 'Aisyah@gmail.com');
+
+-- Data Produk
+INSERT INTO produk (ID_Produk, Nama_Produk, Jenis_Produk, Ukuran, Harga) VALUES
+('01111', 'Makanan Kucing', 'Dry Food', '300 gram', 30000),
+('01112', 'Makanan Kucing', 'Wet Food', '300 gram', 25000),
+('01113', 'Makanan Kucing', 'Dry Food', '150 gram', 15000),
+('01114', 'Makanan Kucing', 'Wet Food', '150 gram', 18000),
+('02221', 'Makanan Anjing', 'Dry Food', '300 gram', 35000),
+('02222', 'Makanan Anjing', 'Wet Food', '300 gram', 30000),
+('03331', 'Makanan Hamster', 'Popcorn', '150 gram', 20000),
+('04441', 'Makanan Ikan', 'Dry Food', '200 gram', 24000),
+('12332', 'Aquarium', 'Aquarium', '20x20 cm', 35000),
+('23437', 'Obat Kutu Khusus Anjing', 'Obat', '200 ml', 20000);
+
+-- Data Pembelian (Transaksi)
+INSERT INTO pembelian (ID_Pembelian, ID_Kasir, ID_Pembeli, ID_Produk) VALUES
+('1234567890', '10001', '00000', '01111'),
+('1234567891', '10002', '11111', '01112'),
+('1234567892', '10003', '22221', '01113'),
+('1234567893', '10004', '00003', '01114'),
+('0989798986', '10005', '00005', '01114'),
+('2431456435', '10002', '00002', '23437'),
+('3488890766', '10003', '00004', '03331'),
+('3544443565', '10004', '11112', '04441');

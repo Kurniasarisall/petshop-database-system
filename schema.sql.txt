@@ -1,0 +1,47 @@
+-- =====================================================
+-- DATABASE: pet_shop
+-- Proyek Akhir Sistem Teknologi Basis Data
+-- =====================================================
+
+CREATE DATABASE IF NOT EXISTS pet_shop;
+USE pet_shop;
+
+-- 1. Tabel Master: Kasir
+CREATE TABLE kasir (
+    ID_Kasir CHAR(5) NOT NULL,
+    Nama_Kasir VARCHAR(50) NOT NULL,
+    Tanggal_Lahir CHAR(10) NOT NULL,
+    Email_kasir VARCHAR(45) NOT NULL,
+    PRIMARY KEY (ID_Kasir)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 2. Tabel Master: Pembeli
+CREATE TABLE pembeli (
+    ID_Pembeli CHAR(5) NOT NULL,
+    Nama_Pembeli VARCHAR(50) NOT NULL,
+    Alamat_Pembeli VARCHAR(70) NOT NULL,
+    Email_Pembeli VARCHAR(45) NOT NULL,
+    PRIMARY KEY (ID_Pembeli)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 3. Tabel Master: Produk
+CREATE TABLE produk (
+    ID_Produk CHAR(10) NOT NULL,
+    Nama_Produk VARCHAR(70) NOT NULL,
+    Jenis_Produk VARCHAR(20) NOT NULL,
+    Ukuran VARCHAR(30) NOT NULL,
+    Harga INT NOT NULL, -- Format integer agar dapat dihitung di query agregasi
+    PRIMARY KEY (ID_Produk)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 4. Tabel Transaksi / Relasi: Pembelian
+CREATE TABLE pembelian (
+    ID_Pembelian VARCHAR(10) NOT NULL,
+    ID_Kasir CHAR(5) NOT NULL,
+    ID_Pembeli CHAR(5) NOT NULL,
+    ID_Produk CHAR(10) NOT NULL,
+    PRIMARY KEY (ID_Pembelian),
+    CONSTRAINT fk_pembelian_kasir FOREIGN KEY (ID_Kasir) REFERENCES kasir(ID_Kasir) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_pembelian_pembeli FOREIGN KEY (ID_Pembeli) REFERENCES pembeli(ID_Pembeli) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_pembelian_produk FOREIGN KEY (ID_Produk) REFERENCES produk(ID_Produk) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

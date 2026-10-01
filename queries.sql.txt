@@ -1,0 +1,37 @@
+USE pet_shop;
+
+-- 1. Menampilkan seluruh data transaksi lengkap (JOIN 4 Tabel)
+SELECT 
+    pb.ID_Pembelian AS 'No Struk',
+    p.Nama_Pembeli AS 'Nama Pelanggan',
+    p.Alamat_Pembeli AS 'Kota',
+    pr.Nama_Produk AS 'Barang',
+    pr.Ukuran,
+    pr.Harga,
+    k.Nama_Kasir AS 'Kasir Bertugas'
+FROM pembelian pb
+JOIN pembeli p ON pb.ID_Pembeli = p.ID_Pembeli
+JOIN produk pr ON pb.ID_Produk = pr.ID_Produk
+JOIN kasir k ON pb.ID_Kasir = k.ID_Kasir
+ORDER BY pb.ID_Pembelian ASC;
+
+-- 2. Menghitung total omset dan jumlah transaksi tiap kasir
+SELECT 
+    k.Nama_Kasir,
+    COUNT(pb.ID_Pembelian) AS 'Total Transaksi Dilayani',
+    SUM(pr.Harga) AS 'Total Penjualan (Rp)'
+FROM pembelian pb
+JOIN kasir k ON pb.ID_Kasir = k.ID_Kasir
+JOIN produk pr ON pb.ID_Produk = pr.ID_Produk
+GROUP BY k.ID_Kasir, k.Nama_Kasir
+ORDER BY `Total Penjualan (Rp)` DESC;
+
+-- 3. Mencari produk terlaris berdasarkan frekuensi pembelian
+SELECT 
+    pr.Nama_Produk,
+    pr.Jenis_Produk,
+    COUNT(pb.ID_Pembelian) AS 'Jumlah Terjual'
+FROM pembelian pb
+JOIN produk pr ON pb.ID_Produk = pr.ID_Produk
+GROUP BY pr.ID_Produk, pr.Nama_Produk, pr.Jenis_Produk
+ORDER BY `Jumlah Terjual` DESC;
