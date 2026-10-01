@@ -2,11 +2,11 @@
 Informatika - UPN Veteran Yogyakarta
 
 Anggota Kelompok:
-Mukhlizardy Al Fauzan	 (123180041)
-Taura Kaka Arissa 		 (123230207)
-Andhiko Sakti 		     (123230228)
-Bagoes Lanang Cahya 	 (123230231)
-Kurniasari Salasa		   (123230236)
+- Mukhlizardy Al Fauzan	 (123180041)
+- Taura Kaka Arissa 		 (123230207)
+- Andhiko Sakti 		     (123230228)
+- Bagoes Lanang Cahya 	 (123230231)
+- Kurniasari Salasa		   (123230236)
 
 
 Proyek perancangan dan implementasi basis data relasional berbasis MySQL untuk kebutuhan operasional toko hewan peliharaan (Pet Shop). Sistem ini dirancang untuk mengelola entitas master (produk, kasir, pembeli) serta mencatat riwayat transaksi secara terintegrasi.
@@ -16,31 +16,29 @@ Proyek perancangan dan implementasi basis data relasional berbasis MySQL untuk k
 ## Gambaran Umum
 Sistem ini memodelkan proses bisnis ritel pet shop mulai dari pendataan stok pakan dan aksesoris hewan, data kasir bertugas, data pelanggan, hingga pencatatan struk transaksi pembelian.
 
-- **Database Engine:** MySQL / MariaDB (InnoDB)[cite: 11]
-- **Platform Pengujian:** phpMyAdmin[cite: 11, 13]
+- **Database Engine:** MySQL / MariaDB (InnoDB)
+- **Platform Pengujian:** phpMyAdmin
 - **Normalisasi:** Memenuhi kriteria 3NF (Third Normal Form) untuk mencegah anomali data dan meminimalkan redundansi.
 
 ---
 
-## Penjelasan Berkas & Artefak Proyek
+## Berkas Skrip SQL (Source Code)
 
-Repositori ini dilengkapi dengan artefak perancangan dan data pendukung tugas akhir:
+Di dalam repositori ini, kode SQL dipecah secara modular menjadi tiga bagian utama agar mudah diuji dan dipelajari:
 
-1. **`ERD.png` (Entity-Relationship Diagram)**
-   * Merupakan pemodelan konseptual sistem basis data Pet Shop berbasis notasi Chen.
-   * Memetakan entitas utama (`PRODUK`, `PEMBELI`, `KASIR`), relasi transaksi (`Pembelian`), serta atribut masing-masing entitas termasuk Primary Key dan atribut komposit/turunan (`Tanggal Lahir` dan `Umur` pada kasir).
+1. **`schema.sql` (Data Definition Language / DDL)**
+   * Berisi instruksi inisialisasi basis data `pet_shop` beserta definisi 4 tabel utama: `kasir`, `pembeli`, `produk`, dan tabel relasi `pembelian`.
+   * Mengatur tipe data atribut, *Primary Key* (PK), serta pendefinisian aturan relasi *Foreign Key* (FK) dengan klausa `ON DELETE CASCADE` dan `ON UPDATE CASCADE` untuk menjamin integritas referensial data antar-tabel.
 
-2. **`RAT.png` (Relasi Antar Tabel)**
-   * Tangkapan layar skema relasional fisik dari fitur *Designer* phpMyAdmin.
-   * Menampilkan pemetaan *Foreign Key* dari tabel perantara `pembelian` menuju `ID_Pembeli`, `ID_Kasir`, dan `ID_Produk` dengan integritas referensial.
+2. **`dummy_data.sql` (Data Manipulation Language / DML - Seeding)**
+   * Berisi dataset awal untuk pengujian operasional basis data yang mencakup data master pegawai kasir, pelanggan/pembeli, variasi produk pet shop, dan histori transaksi pembelian.
+   * Diimpor setelah `schema.sql` dieksekusi agar tabel memiliki data realistis sebelum dilakukan pengujian kueri.
 
-3. **`data produk petshop.xlsx` (Dataset Awal Produk)**
-   * Berkas lembar kerja Excel berisi daftar mentah inventaris barang toko hewan peliharaan (makanan kucing, obat-obatan, perlengkapan mandi, pasir, dll.).
-   * Digunakan sebagai sumber data acuan sebelum proses normalisasi dan migrasi ke dalam query `INSERT` tabel `produk` pada basis data MySQL.
-
-4. **`PPT Presentasi.pptx` (Materi Paparan Proyek)**
-   * Berkas presentasi kelompok (Sistem Teknologi Basis Data IF-F) yang merangkum keseluruhan proyek[cite: 13].
-   * Memuat diagram ERD, skema relasi tabel (RAT), implementasi query SQL, hingga bukti tangkapan layar pengujian isi tabel pada phpMyAdmin.
+3. **`queries.sql` (Data Query Language / DQL - Business Insights)**
+   * Kumpulan kueri analitikal SQL untuk menghasilkan laporan operasional toko:
+     * **Multi-table JOIN:** Menggabungkan 4 tabel sekaligus (`pembelian`, `pembeli`, `produk`, `kasir`) untuk mencetak rekap transaksi lengkap per struk belanja.
+     * **Agregasi Kasir (`COUNT`, `SUM`, `GROUP BY`):** Menghitung total omset pendapatan toko dan performa volume transaksi yang dilayani oleh masing-masing kasir.
+     * **Analisis Produk Terlaris:** Menghitung frekuensi pembelian per item produk untuk mengetahui produk yang paling diminati pembeli.
 
 ---
 
